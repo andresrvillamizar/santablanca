@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Dental Santa Blanca — Tu sonrisa merece lo mejor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:       #FFFFFF;
+      --off-white:   #F7FAFF;
+      --light:       #EDF3FF;
+      --blue:        #1B5CC8;
+      --blue-dark:   #1248A5;
+      --blue-light:  #5B9BF8;
+      --blue-pale:   #D6E6FF;
+      --navy:        #0B1F3A;
+      --navy-2:      #0F2848;
+      --text:        #0F1E35;
+      --text-2:      #3B5170;
+      --gray:        #7A90AB;
+      --gray-light:  #C5D4E8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(27,92,200,0.1);
+      transition: box-shadow 0.4s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(11,31,58,0.1); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 30px; height: 30px;
+      background: var(--blue);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .nav-logo-text {
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy); letter-spacing: -0.02em;
+    }
+    .nav-logo-text span { color: var(--blue); }
+
+    .nav-links {
+      display: flex; align-items: center;
+      gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-2); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+      padding: 0.52rem 1.3rem !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--blue-dark) !important; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--navy); transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(255,255,255,0.98); z-index: 199;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--navy); text-decoration: none; transition: color 0.25s;
+    }
+    .mobile-menu a:hover { color: var(--blue); }
+    .mobile-menu .m-cta {
+      background: var(--blue); color: var(--white) !important;
+      padding: 0.85rem 2.8rem; border-radius: 8px; font-size: 1rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 620px;
+      display: flex; align-items: center; overflow: hidden;
+      padding: 0 !important;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&q=80&fit=crop');
+      background-size: cover; background-position: center top;
+      transform: scale(1.05); transition: transform 0.1s;
+    }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(11,31,58,0.55); }
+    .hero-overlay-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,31,58,0.95) 0%, rgba(11,31,58,0.3) 55%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding: 5rem 5% 3rem;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+    }
+    .hero-inner {
+      flex: 1;
+      min-width: 0;
+      max-width: 560px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--blue-light);
+      margin-bottom: 1.2rem;
+      opacity: 0; transform: translateY(15px);
+      transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
+    }
+    .hero-tag.visible { opacity: 1; transform: translateY(0); }
+    .hero-tag::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 2px; background: var(--blue-light);
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 7vw, 6.5rem);
+      font-weight: 800; line-height: 1.0; letter-spacing: -0.025em;
+      color: var(--white); margin-bottom: 2rem;
+      opacity: 0; transform: translateY(25px);
+      transition: opacity 0.7s 0.4s, transform 0.7s 0.4s;
+    }
+    .hero-title.visible { opacity: 1; transform: translateY(0); }
+    .hero-title span { color: var(--blue-light); display: block; }
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      font-weight: 300; letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 3rem; max-width: 500px; line-height: 1.75;
+      opacity: 0; transition: opacity 0.6s 0.65s;
+    }
+    .hero-subtitle.visible { opacity: 1; }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; transition: opacity 0.6s 0.85s;
+    }
+    .hero-actions.visible { opacity: 1; }
+
+    .hero-scroll {
+      position: absolute; bottom: 2rem; right: 5%; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: rgba(255,255,255,0.4); font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      animation: bob 2s ease-in-out infinite;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ── HERO CAROUSEL ── */
+    .hero-carousel-wrap {
+      flex: 0 0 clamp(280px, 32vw, 420px);
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 1s 1.2s, transform 1s 1.2s;
+    }
+    .hero-carousel-wrap.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .carousel-frame {
+      position: relative;
+      width: 100%;
+      height: clamp(280px, calc(100vh - 220px), 420px);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(91,155,248,0.25);
+    }
+    .carousel-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.95s ease-in-out, transform 0.95s ease-in-out;
+      transform: scale(1.05);
+    }
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .carousel-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .carousel-progress {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: rgba(255,255,255,0.15); z-index: 5;
+    }
+    .carousel-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      width: 0%;
+    }
+    @keyframes progress-fill {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    .carousel-progress-bar.running {
+      animation: progress-fill 4s linear forwards;
+    }
+    .carousel-counter {
+      position: absolute; top: 1.1rem; right: 1.1rem; z-index: 5;
+      background: rgba(11,31,58,0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 50px;
+      padding: 0.25rem 0.8rem;
+      font-size: 0.68rem; font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.12em;
+    }
+    .carousel-label {
+      position: absolute; bottom: 1.2rem; left: 1.2rem; z-index: 5;
+      background: rgba(11,31,58,0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(91,155,248,0.25);
+      border-radius: 10px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--blue-light);
+      letter-spacing: 0.06em;
+    }
+    .carousel-dots {
+      display: flex; gap: 0.45rem; justify-content: center; margin-top: 1.2rem;
+    }
+    .carousel-dot {
+      height: 5px; width: 18px; border-radius: 3px;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer; transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      border: none;
+    }
+    .carousel-dot.active {
+      width: 36px;
+      background: var(--blue-light);
+    }
+    .carousel-dot:hover { background: rgba(255,255,255,0.45); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--blue); color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.9rem; padding: 0.95rem 2.2rem;
+      border-radius: 8px; text-decoration: none; border: none;
+      cursor: pointer; transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.9rem; padding: 0.95rem 2.2rem;
+      border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.4);
+      text-decoration: none; transition: border-color 0.25s, background 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .btn-outline-blue {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--blue);
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.9rem; padding: 0.95rem 2.2rem;
+      border-radius: 8px; border: 1.5px solid var(--blue);
+      text-decoration: none; transition: background 0.25s, color 0.25s;
+    }
+    .btn-outline-blue:hover { background: var(--blue); color: var(--white); }
+
+    /* ── STATS ── */
+    .stats {
+      position: relative;
+      padding: 6rem 5%;
+      overflow: hidden;
+      background: var(--navy-2);
+    }
+    .stats-bg-img { display: none; }
+    .stats-overlay { display: none; }
+    @keyframes blob-drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 30px) scale(1.12); }
+    }
+    .stats-inner-wrap {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .stats-header {
+      text-align: center; margin-bottom: 3.5rem;
+    }
+    .stats-header .section-tag { color: var(--blue-light); }
+    .stats-header .section-tag::before { background: var(--blue-light); }
+    .stats-title {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.1; letter-spacing: -0.025em; margin-top: 0.4rem;
+    }
+    .stats-title span { color: var(--blue-light); }
+    .stats-inner {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem;
+    }
+    .stat-item {
+      background: rgba(11,31,58,0.52);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px; padding: 2rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s, border-color 0.4s, background 0.4s;
+    }
+    .stat-item::before {
+      content: '';
+      position: absolute; top: 0; left: 25%; right: 25%; height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+      opacity: 0; transition: opacity 0.5s 0.35s;
+    }
+    .stat-item.visible { opacity: 1; transform: translateY(0); }
+    .stat-item.visible::before { opacity: 1; }
+    .stat-item:hover {
+      background: rgba(27,92,200,0.38);
+      border-color: rgba(91,155,248,0.4);
+    }
+    .stat-icon {
+      width: 46px; height: 46px;
+      background: rgba(27,92,200,0.22);
+      border: 1px solid rgba(91,155,248,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem; color: var(--blue-light);
+    }
+    .stat-item.visible .stat-icon {
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(91,155,248,0.35); }
+      50%       { box-shadow: 0 0 0 8px rgba(91,155,248,0); }
+    }
+    .stat-number {
+      font-size: 3rem; font-weight: 800; line-height: 1;
+      letter-spacing: -0.03em; margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff 30%, var(--blue-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+    .stat-bar {
+      height: 2px; background: rgba(255,255,255,0.07);
+      border-radius: 1px; margin-top: 1.4rem; overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      border-radius: 1px;
+      transition: width 1.6s cubic-bezier(0.4,0,0.2,1) 0.4s;
+    }
+    .stat-item.visible .stat-bar-fill { width: var(--bar, 75%); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem;
+    }
+    .section-tag::before {
+      content: ''; width: 20px; height: 2px;
+      background: var(--blue); flex-shrink: 0;
+    }
+    .section-tag-light { color: var(--blue-light); }
+    .section-tag-light::before { background: var(--blue-light); }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.022em; color: var(--text); margin-bottom: 1.2rem;
+    }
+    .section-title-light { color: var(--white); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── ABOUT ── */
+    .about { background: var(--off-white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-image-wrap { position: relative; }
+    .about-img {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      object-position: top; display: block; border-radius: 12px;
+    }
+    .about-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      width: 110px; height: 110px;
+      background: var(--blue); border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(27,92,200,0.4);
+    }
+    .about-badge strong { font-size: 2.4rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .about-badge span {
+      font-size: 0.5rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: rgba(255,255,255,0.82);
+      text-align: center; line-height: 1.35;
+    }
+    .about-text p {
+      font-size: 0.97rem; line-height: 1.85;
+      color: var(--text-2); margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 600; }
+    .about-detail { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; }
+    .about-detail-icon {
+      width: 40px; height: 40px;
+      background: var(--light); border: 1px solid var(--blue-pale);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .about-detail-text strong {
+      display: block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 0.15rem;
+    }
+    .about-detail-text span { font-size: 0.88rem; color: var(--text-2); }
+
+    /* ── SERVICES ── */
+    .services {
+      position: relative;
+      overflow: hidden;
+    }
+    .services-bg-img {
+      position: absolute; inset: 0;
+      background-image: url('assets/santablanca.webp');
+      background-size: cover; background-position: center;
+      transform: scale(1.08);
+      transition: transform 0.1s linear;
+    }
+    .services-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(11,31,58,0.93) 0%,
+        rgba(11,31,58,0.82) 50%,
+        rgba(27,92,200,0.6) 100%
+      );
+    }
+    .services::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+    .services-blob-1 {
+      position: absolute; width: 650px; height: 650px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,92,200,0.22) 0%, transparent 70%);
+      top: -220px; right: -180px; pointer-events: none;
+      animation: blob-drift 12s ease-in-out infinite alternate;
+    }
+    .services-blob-2 {
+      position: absolute; width: 450px; height: 450px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,155,248,0.14) 0%, transparent 70%);
+      bottom: -180px; left: -120px; pointer-events: none;
+      animation: blob-drift 15s ease-in-out infinite alternate-reverse;
+    }
+    .services-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap;
+    }
+    .services .section-tag { color: var(--blue-light); }
+    .services .section-tag::before { background: var(--blue-light); }
+    .services .section-title { color: var(--white); }
+    .services .btn-outline-blue {
+      border-color: rgba(91,155,248,0.4); color: var(--blue-light);
+    }
+    .services .btn-outline-blue:hover {
+      background: rgba(27,92,200,0.2); border-color: var(--blue-light); color: var(--white);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px; padding: 2.2rem;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.65s, transform 0.65s, border-color 0.35s, background 0.35s;
+    }
+    .service-card.visible { opacity: 1; transform: translateY(0); }
+    .service-card:hover {
+      background: rgba(27,92,200,0.1);
+      border-color: rgba(91,155,248,0.3);
+      transform: translateY(-6px);
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(91,155,248,0.7), transparent);
+      opacity: 0; transition: opacity 0.5s 0.3s;
+    }
+    .service-card.visible::before { opacity: 1; }
+    .service-card-num {
+      position: absolute; top: -16px; right: 1.2rem;
+      font-size: 7rem; font-weight: 900; line-height: 1;
+      color: rgba(255,255,255,0.03);
+      pointer-events: none; user-select: none;
+      font-variant-numeric: tabular-nums;
+    }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(27,92,200,0.22);
+      border: 1px solid rgba(91,155,248,0.3);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.3rem;
+      color: var(--blue-light);
+      flex-shrink: 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: rgba(27,92,200,0.35);
+      border-color: rgba(91,155,248,0.55);
+    }
+    .service-icon svg { width: 26px; height: 26px; }
+    .service-card-title {
+      font-size: 1.08rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.65rem;
+    }
+    .service-card-desc {
+      font-size: 0.86rem; color: rgba(255,255,255,0.55); line-height: 1.78;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band { position: relative; overflow: hidden; }
+    .cta-band-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1588776814546-1ffedac0bc7f?w=1920&q=80&fit=crop');
+      background-size: cover; background-position: center;
+    }
+    .cta-band-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(11,31,58,0.93) 0%, rgba(27,92,200,0.87) 100%);
+    }
+    .cta-band-inner {
+      position: relative; z-index: 2;
+      max-width: 1100px; margin: 0 auto; padding: 6rem 5%;
+      display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+    }
+    .cta-band-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+      color: var(--white); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.8rem;
+    }
+    .cta-band-sub { font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.7; }
+    .cta-band-actions { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+
+    /* ── PLANES ── */
+    .planes { background: var(--navy); padding: 6rem 5%; }
+    .planes .section-inner > .section-tag { color: var(--blue-light); }
+    .planes .section-inner > .section-tag::before { background: var(--blue-light); }
+    .planes-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .plan-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 2.5rem;
+      opacity: 0; transform: translateY(25px);
+      transition: opacity 0.6s, transform 0.6s, border-color 0.3s, background 0.3s;
+    }
+    .plan-card.visible { opacity: 1; transform: translateY(0); }
+    .plan-card:hover { border-color: var(--blue-light); background: rgba(91,155,248,0.07); }
+    .plan-card.featured { border-color: var(--blue-light); background: rgba(27,92,200,0.18); }
+    .plan-badge {
+      display: inline-block; background: var(--blue); color: var(--white);
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.3rem 0.9rem;
+      border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .plan-card.featured .plan-badge { background: var(--blue-light); color: var(--navy); }
+    .plan-name { font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .plan-desc { font-size: 0.85rem; color: rgba(255,255,255,0.52); line-height: 1.65; margin-bottom: 1.5rem; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .plan-features li {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.85rem; color: rgba(255,255,255,0.72);
+    }
+    .plan-features li::before { content: '✓'; color: var(--blue-light); font-weight: 700; flex-shrink: 0; }
+
+    /* ── SUCURSALES ── */
+    .sucursales {
+      position: relative;
+      background: var(--navy);
+      overflow: hidden;
+    }
+    .sucursales::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .sucursales .section-tag { color: var(--blue-light); }
+    .sucursales .section-tag::before { background: var(--blue-light); }
+    .sucursales .section-title { color: var(--white); }
+    .sucursales-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap;
+    }
+    .sucursales-header p { font-size: 0.97rem; color: rgba(255,255,255,0.55); max-width: 400px; line-height: 1.75; }
+    .sucursales-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1.1rem;
+    }
+    .sucursal-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; overflow: hidden;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s, border-color 0.35s, box-shadow 0.35s;
+    }
+    .sucursal-card.visible { opacity: 1; transform: translateY(0); }
+    .sucursal-card:hover {
+      border-color: rgba(91,155,248,0.35);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      transform: translateY(-5px);
+    }
+    .sucursal-photo {
+      position: relative; height: 140px; overflow: hidden;
+      background: var(--navy-2);
+    }
+    .sucursal-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.55s ease;
+    }
+    .sucursal-card:hover .sucursal-photo img { transform: scale(1.1); }
+    .sucursal-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,31,58,0.88) 0%, rgba(11,31,58,0.15) 55%, transparent 100%);
+    }
+    .sucursal-city-badge {
+      position: absolute; top: 0.7rem; left: 0.8rem;
+      background: rgba(27,92,200,0.75);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(91,155,248,0.3);
+      border-radius: 20px;
+      padding: 0.18rem 0.65rem;
+      font-size: 0.62rem; font-weight: 700;
+      color: rgba(255,255,255,0.9); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .sucursal-body { padding: 1rem 1.1rem 1.25rem; }
+    .sucursal-name {
+      font-size: 0.93rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .sucursal-addr { font-size: 0.74rem; color: rgba(255,255,255,0.42); line-height: 1.6; }
+    .sucursal-icon { display: none; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 2rem;
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .contact-item.visible { opacity: 1; transform: translateX(0); }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--light); border: 1px solid var(--blue-pale);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 0.3rem;
+    }
+    .contact-value { font-size: 0.92rem; color: var(--text-2); line-height: 1.6; }
+    .contact-value a { color: var(--text-2); text-decoration: none; transition: color 0.25s; }
+    .contact-value a:hover { color: var(--blue); }
+
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: #25D366; color: #fff;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 0.88rem; padding: 1rem 2rem;
+      border-radius: 8px; text-decoration: none; margin-top: 0.5rem;
+      transition: opacity 0.25s, transform 0.2s;
+    }
+    .wa-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gray);
+    }
+    .form-input, .form-textarea, .form-select {
+      background: var(--off-white); border: 1px solid var(--gray-light);
+      border-radius: 8px; padding: 0.85rem 1rem;
+      color: var(--text); font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; transition: border-color 0.25s; width: 100%; appearance: none;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none; border-color: var(--blue); background: var(--white);
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-light); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-select option { background: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080F1E;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 5rem 5% 0;
+    }
+    .footer-main {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1.4fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-logo-wrap {
+      display: flex; align-items: center; gap: 0.65rem; margin-bottom: 1.25rem;
+    }
+    .footer-logo-icon {
+      width: 36px; height: 36px; background: var(--blue);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    }
+    .footer-logo-text { font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
+    .footer-logo-text span { color: var(--blue-light); }
+    .footer-brand-desc {
+      font-size: 0.83rem; color: rgba(255,255,255,0.38);
+      line-height: 1.8; margin-bottom: 2rem; max-width: 290px;
+    }
+    .footer-social { display: flex; gap: 0.6rem; }
+    .footer-social-link {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+    }
+    .footer-social-link:hover {
+      background: rgba(27,92,200,0.25);
+      border-color: rgba(91,155,248,0.5);
+      color: var(--white);
+    }
+    .footer-col-title {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.13em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 1.4rem;
+    }
+    .footer-nav-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-nav-links a {
+      font-size: 0.84rem; color: rgba(255,255,255,0.48);
+      text-decoration: none; transition: color 0.25s;
+    }
+    .footer-nav-links a:hover { color: var(--white); }
+    .footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 0.7rem; }
+    .footer-contact-icon { color: var(--blue-light); flex-shrink: 0; margin-top: 1px; }
+    .footer-contact-text {
+      font-size: 0.81rem; color: rgba(255,255,255,0.45); line-height: 1.55;
+    }
+    .footer-contact-text a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.25s; }
+    .footer-contact-text a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 0;
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    .footer-copy {
+      font-size: 0.71rem; color: rgba(255,255,255,0.2);
+    }
+    .footer-dev {
+      font-size: 0.71rem; color: rgba(255,255,255,0.2);
+    }
+    .footer-dev a { color: var(--blue-light); text-decoration: none; font-weight: 600; transition: color 0.25s; }
+    .footer-dev a:hover { color: var(--white); }
+
+    /* ── SERVICES CTA ── */
+    .services-cta {
+      text-align: center; margin-top: 3.5rem; position: relative;
+    }
+    .services-cta-label {
+      font-size: 0.83rem; color: rgba(255,255,255,0.38);
+      margin-bottom: 1.4rem; letter-spacing: 0.04em;
+    }
+    .services-cta-wrap { display: inline-block; position: relative; }
+    .services-cta-wrap::before, .services-cta-wrap::after {
+      content: ''; position: absolute; inset: -7px;
+      border-radius: 50px; border: 1px solid rgba(91,155,248,0.28);
+      animation: pulse-cta 2.6s ease-out infinite; pointer-events: none;
+    }
+    .services-cta-wrap::after {
+      inset: -14px; animation-delay: 0.65s;
+      border-color: rgba(91,155,248,0.12);
+    }
+    @keyframes pulse-cta {
+      0%   { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.09); opacity: 0; }
+    }
+    .btn-services-cta {
+      display: inline-flex; align-items: center; gap: 0.85rem;
+      background: linear-gradient(135deg, #1B5CC8 0%, #2D7AFF 55%, #1248A5 100%);
+      color: var(--white); font-size: 1rem; font-weight: 700;
+      padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none;
+      position: relative; overflow: hidden;
+      box-shadow: 0 0 32px rgba(27,92,200,0.45), 0 10px 36px rgba(0,0,0,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+      letter-spacing: -0.01em;
+    }
+    .btn-services-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+      transform: translateX(-120%);
+      animation: shimmer-sweep 2.8s ease-in-out infinite;
+    }
+    @keyframes shimmer-sweep {
+      0%    { transform: translateX(-120%); }
+      55%, 100% { transform: translateX(120%); }
+    }
+    .btn-services-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 50px rgba(27,92,200,0.6), 0 18px 44px rgba(0,0,0,0.4);
+    }
+    .btn-services-cta .scta-icon {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.15); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    /* Tablet ancho (≤1024px) */
+    @media (max-width: 1024px) {
+      .about-grid   { gap: 3rem; }
+      .contact-grid { gap: 3rem; }
+      .footer-main  { gap: 2.5rem; }
+    }
+
+    /* Tablet — ocultar carrusel (≤960px) */
+    @media (max-width: 960px) {
+      .hero-carousel-wrap { display: none; }
+      .hero-content { align-items: flex-end; padding: 0 5% 4rem; }
+      .hero  { align-items: flex-end; }
+      .hero-inner { max-width: 100%; }
+    }
+
+    /* Tablet — nav + grids (≤900px) */
+    @media (max-width: 900px) {
+      .nav-links  { display: none; }
+      .hamburger  { display: flex; }
+
+      .about-grid       { grid-template-columns: 1fr; gap: 4rem; }
+      .about-image-wrap { max-width: 420px; margin: 0 auto; }
+      .about-badge      { right: 0; bottom: -0.75rem; }
+
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+
+      .services-grid   { grid-template-columns: repeat(2, 1fr); }
+      .services-header { flex-direction: column; align-items: flex-start; }
+
+      .sucursales-grid   { grid-template-columns: repeat(3, 1fr); }
+      .sucursales-header { flex-direction: column; align-items: flex-start; }
+
+      .cta-band-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-grid   { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* Footer tablet (≤760px) */
+    @media (max-width: 760px) {
+      .footer-main   { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* Mobile (≤600px) */
+    @media (max-width: 600px) {
+      section { padding: 4rem 5%; }
+      .stats  { padding: 4rem 5%; }
+
+      .hero-content { padding: 0 5% 3rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { text-align: center; justify-content: center; }
+
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+      .stat-item   { padding: 1.5rem 1rem; }
+      .stat-number { font-size: 2.2rem; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .sucursales-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .btn-services-cta { font-size: 0.88rem; padding: 0.85rem 1.6rem; gap: 0.6rem; }
+      .scta-icon { width: 28px; height: 28px; }
+
+      .about-badge        { width: 88px; height: 88px; right: 0; bottom: -0.5rem; }
+      .about-badge strong { font-size: 1.8rem; }
+      .about-badge span   { font-size: 0.44rem; }
+    }
+
+    /* Móvil pequeño (≤420px) */
+    @media (max-width: 420px) {
+      .sucursales-grid { grid-template-columns: 1fr; }
+      .services-cta-wrap::before,
+      .services-cta-wrap::after { display: none; }
+      .stats-inner { gap: 0.6rem; }
+      .stat-number { font-size: 1.9rem; }
+      .footer-main { padding-bottom: 3rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-tag, .hero-title, .hero-subtitle, .hero-actions,
+      .reveal, .reveal-left, .reveal-right,
+      .stat-item, .service-card, .sucursal-card, .contact-item {
+        opacity: 1; transform: none; transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#inicio" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9.2 2 7 4.3 7 7c0 1.5.5 3 1.1 4.4L9.5 22h5L16 11.4C16.5 10 17 8.5 17 7c0-2.7-2.2-5-5-5z"/><path d="M9.5 9C10.1 7.8 11 7.2 12 7.2s1.9.6 2.5 1.8"/></svg>
+    </div>
+    <div class="nav-logo-text">Santa<span>Blanca</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#sucursales">Sucursales</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="tel:6006560240" class="nav-cta">Agenda Online</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#nosotros" class="mobile-link">Nosotros</a>
+  <a href="#especialidades" class="mobile-link">Especialidades</a>
+  <a href="#sucursales" class="mobile-link">Sucursales</a>
+  <a href="#contacto" class="mobile-link">Contacto</a>
+  <a href="tel:6006560240" class="m-cta mobile-link">Agenda Online</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-tag" id="heroTag">14 Clínicas en Chile</div>
+      <h1 class="hero-title" id="heroTitle">Tu sonrisa<br /><span>merece lo mejor</span></h1>
+      <p class="hero-subtitle" id="heroSub">Odontología de excelencia con tecnología de vanguardia. Un solo clic separa a tu sonrisa de la mejor versión de sí misma.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href="tel:6006560240" class="btn-primary">Agenda tu hora →</a>
+        <a href="https://wa.me/56958306543" class="btn-outline" target="_blank" rel="noopener">WhatsApp Urgencias</a>
+      </div>
+    </div>
+    <!-- CAROUSEL -->
+    <div class="hero-carousel-wrap" id="heroCarousel">
+      <div class="carousel-frame">
+        <div class="carousel-slide active">
+          <img src="assets/santablanca.webp" alt="Clínica Santa Blanca" />
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/santa-blanca.webp" alt="Clínica Santa Blanca" />
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/santa-blanca1.webp" alt="Clínica Santa Blanca" />
+        </div>
+        <div class="carousel-slide">
+          <img src="assets/santa-blanca2.webp" alt="Clínica Santa Blanca" />
+        </div>
+        <div class="carousel-progress"><div class="carousel-progress-bar" id="carouselBar"></div></div>
+        <div class="carousel-counter" id="carouselCounter">01 / 04</div>
+        <div class="carousel-label">Clínica Santa Blanca</div>
+      </div>
+      <div class="carousel-dots" id="carouselDots">
+        <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Foto 1"></button>
+        <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Foto 2"></button>
+        <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Foto 3"></button>
+        <button class="carousel-dot" onclick="goToSlide(3)" aria-label="Foto 4"></button>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-bg-img" id="statsBg"></div>
+  <div class="stats-overlay"></div>
+  <div class="stats-inner-wrap">
+    <div class="stats-header">
+      <div class="section-tag">Nuestra presencia</div>
+      <h2 class="stats-title">Líderes en salud dental<br/><span>a lo largo de Chile</span></h2>
+    </div>
+    <div class="stats-inner">
+
+    <div class="stat-item" style="--bar:72%">
+      <div class="stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="stat-number"><span class="counter" data-target="14">0</span>+</div>
+      <div class="stat-label">Clínicas en Chile</div>
+      <div class="stat-bar"><div class="stat-bar-fill"></div></div>
+    </div>
+
+    <div class="stat-item" style="transition-delay:.12s; --bar:92%">
+      <div class="stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="stat-number"><span class="counter" data-target="100">0</span>K+</div>
+      <div class="stat-label">Pacientes atendidos</div>
+      <div class="stat-bar"><div class="stat-bar-fill"></div></div>
+    </div>
+
+    <div class="stat-item" style="transition-delay:.24s; --bar:60%">
+      <div class="stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9.2 2 7 4.3 7 7c0 1.5.5 3 1.1 4.4L9.5 22h5L16 11.4C16.5 10 17 8.5 17 7c0-2.7-2.2-5-5-5z"/><path d="M9.5 9c.6-1.2 1.5-1.8 2.5-1.8s1.9.6 2.5 1.8"/></svg>
+      </div>
+      <div class="stat-number"><span class="counter" data-target="6">0</span></div>
+      <div class="stat-label">Especialidades</div>
+      <div class="stat-bar"><div class="stat-bar-fill"></div></div>
+    </div>
+
+    <div class="stat-item" style="transition-delay:.36s; --bar:100%">
+      <div class="stat-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+      </div>
+      <div class="stat-number">600</div>
+      <div class="stat-label">Línea de atención</div>
+      <div class="stat-bar"><div class="stat-bar-fill"></div></div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal-left">
+        <img
+          class="about-img"
+          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80&fit=crop"
+          alt="Clínica Dental Santa Blanca"
+          loading="lazy"
+          onerror="this.style.background='var(--light)'; this.style.display='block';"
+        />
+        <div class="about-badge">
+          <strong>20</strong>
+          <span>años de<br />excelencia</span>
+        </div>
+      </div>
+      <div class="about-text reveal-right">
+        <div class="section-tag">Quiénes somos</div>
+        <h2 class="section-title">Una nueva experiencia<br />dental te espera</h2>
+        <p>La <strong>Clínica Dental Santa Blanca</strong> es la red de clínicas dentales más comprometida con la salud bucal de los chilenos. Con más de 20 años de trayectoria, hemos transformado la sonrisa de cientos de miles de pacientes.</p>
+        <p>Nuestro equipo de especialistas certificados combina tecnología de vanguardia con un trato humano y cercano, para que cada visita sea una experiencia cómoda y sin estrés.</p>
+
+        <div class="about-detail" style="margin-top:1.8rem">
+          <div class="about-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .84h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="about-detail-text">
+            <strong>Línea de atención</strong>
+            <span>600 656 0240 — lunes a sábado</span>
+          </div>
+        </div>
+        <div class="about-detail">
+          <div class="about-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="about-detail-text">
+            <strong>Cobertura nacional</strong>
+            <span>14+ sucursales en Santiago y regiones</span>
+          </div>
+        </div>
+        <div class="about-detail">
+          <div class="about-detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9.2 2 7 4.3 7 7c0 1.5.5 3 1.1 4.4L9.5 22h5L16 11.4C16.5 10 17 8.5 17 7c0-2.7-2.2-5-5-5z"/><path d="M9.5 9c.6-1.2 1.5-1.8 2.5-1.8s1.9.6 2.5 1.8"/></svg></div>
+          <div class="about-detail-text">
+            <strong>Especialidades</strong>
+            <span>Integral · Ortodoncia · Estética · Implantes · Pediatría · Urgencias</span>
+          </div>
+        </div>
+
+        <a href="tel:6006560240" class="btn-primary" style="margin-top:2rem; display:inline-flex; width:fit-content;">
+          Agendar hora
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section class="services" id="especialidades">
+  <div class="services-bg-img" id="servicesBg"></div>
+  <div class="services-overlay"></div>
+  <div class="services-blob-1"></div>
+  <div class="services-blob-2"></div>
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-tag reveal">Especialidades</div>
+        <h2 class="section-title reveal" style="transition-delay:.1s">Todo lo que tu sonrisa<br />necesita</h2>
+      </div>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-card-num">01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3 class="service-card-title">Odontología Integral</h3>
+        <p class="service-card-desc">Tratamientos completos de prevención y diagnóstico temprano. Limpiezas profesionales, obturaciones y controles periódicos para mantener tu salud bucal óptima.</p>
+      </div>
+
+      <div class="service-card" style="transition-delay:.1s">
+        <div class="service-card-num">02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="8" width="4" height="9" rx="2"/><rect x="10" y="6" width="4" height="11" rx="2"/><rect x="17" y="8" width="4" height="9" rx="2"/><line x1="7" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="17" y2="12"/></svg>
+        </div>
+        <h3 class="service-card-title">Ortodoncia</h3>
+        <p class="service-card-desc">Brackets metálicos, de zafiro y alineadores transparentes tipo Invisalign®. Corregimos la posición de tus dientes de forma efectiva y estética para adultos y niños.</p>
+      </div>
+
+      <div class="service-card" style="transition-delay:.2s">
+        <div class="service-card-num">03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.4H19l-4.6 3.3 1.8 5.3L12 14l-4.2 3 1.8-5.3L5 8.4h5.2z"/><line x1="5" y1="3" x2="5" y2="5.5"/><line x1="3.75" y1="4.25" x2="6.25" y2="4.25"/><line x1="19" y1="18" x2="19" y2="20.5"/><line x1="17.75" y1="19.25" x2="20.25" y2="19.25"/></svg>
+        </div>
+        <h3 class="service-card-title">Estética Dental</h3>
+        <p class="service-card-desc">Blanqueamiento dental profesional, carillas de porcelana y composite. Diseño de sonrisa personalizado para lograr el resultado que siempre has soñado.</p>
+      </div>
+
+      <div class="service-card" style="transition-delay:.3s">
+        <div class="service-card-num">04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="8"/><line x1="9" y1="4" x2="12" y2="4"/><line x1="9" y1="6" x2="12" y2="6"/><circle cx="12" cy="11" r="3"/><path d="M9 19h6l1 3H8z"/><line x1="12" y1="14" x2="12" y2="19"/></svg>
+        </div>
+        <h3 class="service-card-title">Implantes Dentales</h3>
+        <p class="service-card-desc">Implantes de titanio de alta calidad para reponer dientes perdidos de forma definitiva. Devuelve tu mordida, estética y confianza con la solución más duradera.</p>
+      </div>
+
+      <div class="service-card" style="transition-delay:.4s">
+        <div class="service-card-num">05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3 class="service-card-title">Odontopediatría</h3>
+        <p class="service-card-desc">Atención dental especializada para niños desde los primeros dientes. Ambiente amigable y equipo capacitado para hacer cada visita una experiencia positiva.</p>
+      </div>
+
+      <div class="service-card" style="transition-delay:.5s">
+        <div class="service-card-num">06</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3 class="service-card-title">Urgencias Dentales</h3>
+        <p class="service-card-desc">Atención de urgencia para dolores, fracturas o accidentes dentales. Disponibilidad en múltiples sucursales y WhatsApp para cuando más nos necesitas.</p>
+      </div>
+
+    </div>
+
+    <div class="services-cta reveal">
+      <p class="services-cta-label">¿Listo para mejorar tu sonrisa?</p>
+      <div class="services-cta-wrap">
+        <a href="tel:6006560240" class="btn-services-cta">
+          <span class="scta-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.4 1.18 2 2 0 012.37.84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </span>
+          Agendar hora ahora
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BAND -->
+
+<!-- PLANES -->
+
+<!-- SUCURSALES -->
+<section class="sucursales" id="sucursales">
+  <div class="section-inner">
+    <div class="sucursales-header">
+      <div>
+        <div class="section-tag reveal">Nuestra red</div>
+        <h2 class="section-title reveal" style="transition-delay:.1s">14 clínicas<br />en todo Chile</h2>
+      </div>
+      <p class="reveal" style="transition-delay:.2s">Estamos en las principales ciudades y comunas del país para que siempre tengas una clínica Santa Blanca cerca de ti.</p>
+    </div>
+    <div class="sucursales-grid">
+
+      <div class="sucursal-card">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1535479672101-8486af672be0?w=400&h=280&q=80&fit=crop" alt="Las Condes" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Las Condes</div>
+          <div class="sucursal-addr">Av. Apoquindo 3000</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.05s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1573225117613-01e94c4a922f?w=400&h=280&q=80&fit=crop" alt="Providencia" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Providencia</div>
+          <div class="sucursal-addr">Av. Providencia 1234</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.10s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1689850543263-01a52ccc6943?w=400&h=280&q=80&fit=crop" alt="Ñuñoa" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Ñuñoa</div>
+          <div class="sucursal-addr">Av. Irarrázaval 890</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.15s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1557974040-3bec341da09b?w=400&h=280&q=80&fit=crop" alt="Maipú" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Maipú</div>
+          <div class="sucursal-addr">Av. Pajaritos 2345</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.20s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1593985437133-03d5e1435c03?w=400&h=280&q=80&fit=crop" alt="La Florida" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">La Florida</div>
+          <div class="sucursal-addr">Av. Vicuña Mackenna 5670</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.25s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1566079463188-97d2f1352582?w=400&h=280&q=80&fit=crop" alt="Pudahuel" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Santiago</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Pudahuel</div>
+          <div class="sucursal-addr">Camino a Melipilla 780</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.30s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1490782300182-697b80ad4293?w=400&h=280&q=80&fit=crop" alt="Valparaíso" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Valparaíso</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Valparaíso</div>
+          <div class="sucursal-addr">Av. Argentina 340</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.35s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1585174269742-8f37c0afa985?w=400&h=280&q=80&fit=crop" alt="Viña del Mar" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Viña del Mar</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Viña del Mar</div>
+          <div class="sucursal-addr">Av. Libertad 560</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.40s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1649641742906-4ba5b8652b2e?w=400&h=280&q=80&fit=crop" alt="Concepción" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">Concepción</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">Concepción</div>
+          <div class="sucursal-addr">Barros Arana 980</div>
+        </div>
+      </div>
+
+      <div class="sucursal-card" style="transition-delay:.45s">
+        <div class="sucursal-photo">
+          <img src="https://images.unsplash.com/photo-1600590086802-08e62ea453b1?w=400&h=280&q=80&fit=crop" alt="La Serena" loading="lazy"/>
+          <div class="sucursal-photo-overlay"></div>
+          <div class="sucursal-city-badge">La Serena</div>
+        </div>
+        <div class="sucursal-body">
+          <div class="sucursal-name">La Serena</div>
+          <div class="sucursal-addr">Av. Francisco de Aguirre 456</div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:2.5rem">
+      <a href="tel:6006560240" class="btn-outline-blue reveal">Ver todas las sucursales →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="section-tag reveal">Contacto</div>
+        <h2 class="section-title reveal" style="transition-delay:.1s; margin-bottom:2.5rem;">¿Listo para mejorar<br />tu sonrisa?</h2>
+
+        <div class="contact-item">
+          <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 013 .84h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div>
+            <div class="contact-label">Teléfono</div>
+            <div class="contact-value"><a href="tel:6006560240">600 656 0240</a></div>
+          </div>
+        </div>
+        <div class="contact-item" style="transition-delay:.12s">
+          <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div>
+            <div class="contact-label">WhatsApp Urgencias</div>
+            <div class="contact-value"><a href="https://wa.me/56958306543">+56 9 5830 6543</a></div>
+          </div>
+        </div>
+        <div class="contact-item" style="transition-delay:.24s">
+          <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <div class="contact-label">Correo electrónico</div>
+            <div class="contact-value"><a href="mailto:contacto@clinicasantablanca.cl">contacto@clinicasantablanca.cl</a></div>
+          </div>
+        </div>
+        <div class="contact-item" style="transition-delay:.36s">
+          <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="contact-label">Horario de atención</div>
+            <div class="contact-value">Lun–Vie 8:00–20:00 h<br />Sábado 9:00–14:00 h</div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/56958306543" class="wa-btn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.555 4.103 1.523 5.83L.057 23.857l6.194-1.424A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.017-1.373l-.36-.214-3.727.857.875-3.625-.234-.372A9.818 9.818 0 1112 21.818z"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <div class="reveal-right">
+        <form class="contact-form" onsubmit="handleForm(event)">
+          <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-input" placeholder="Tu nombre completo" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Teléfono</label>
+            <input type="tel" class="form-input" placeholder="+56 9 ..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Especialidad de interés</label>
+            <select class="form-select form-input">
+              <option value="">Selecciona una especialidad</option>
+              <option>Odontología Integral</option>
+              <option>Ortodoncia</option>
+              <option>Estética Dental</option>
+              <option>Implantes Dentales</option>
+              <option>Odontopediatría</option>
+              <option>Urgencia Dental</option>
+              <option>Planes de Salud</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mensaje (opcional)</label>
+            <textarea class="form-textarea" placeholder="¿En qué podemos ayudarte?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="justify-content:center;">
+            Enviar consulta
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+
+    <!-- Columna 1: Marca -->
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <div class="footer-logo-icon">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9.2 2 7 4.3 7 7c0 1.5.5 3 1.1 4.4L9.5 22h5L16 11.4C16.5 10 17 8.5 17 7c0-2.7-2.2-5-5-5z"/><path d="M9.5 9C10.1 7.8 11 7.2 12 7.2s1.9.6 2.5 1.8"/></svg>
+        </div>
+        <div class="footer-logo-text">Santa<span>Blanca</span></div>
+      </div>
+      <p class="footer-brand-desc">Clínica dental líder en Chile con más de 14 sucursales. Comprometidos con tu salud bucal y la mejor tecnología.</p>
+      <div class="footer-social">
+        <!-- Instagram -->
+        <a href="#" class="footer-social-link" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="footer-social-link" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a href="#" class="footer-social-link" aria-label="YouTube">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/56600656240" class="footer-social-link" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna 2: Navegación -->
+    <div>
+      <div class="footer-col-title">Navegación</div>
+      <ul class="footer-nav-links">
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#sucursales">Sucursales</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="tel:6006560240">Agenda tu cita</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3: Contacto -->
+    <div>
+      <div class="footer-col-title">Contacto</div>
+      <ul class="footer-contact-list">
+        <li class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+          <span class="footer-contact-text"><a href="tel:6006560240">600 656 0240</a></span>
+        </li>
+        <li class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span class="footer-contact-text"><a href="mailto:contacto@clinicasantablanca.cl">contacto@clinicasantablanca.cl</a></span>
+        </li>
+        <li class="footer-contact-item">
+          <span class="footer-contact-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="footer-contact-text">14 sucursales en Santiago<br />y regiones de Chile</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Clínica Dental Santa Blanca. Todos los derechos reservados.</p>
+    <p class="footer-dev">Desarrollada y diseñada por <a href="#" target="_blank">Conecta Engine</a></p>
+  </div>
+</footer>
+
+<script>
+  // ── NAV ──
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── PARALLAX HERO ──
+  const heroBg = document.getElementById('heroBg');
+  const statsBg = document.getElementById('statsBg');
+  const servicesBg = document.getElementById('servicesBg');
+  window.addEventListener('scroll', () => {
+    if (heroBg && window.scrollY < window.innerHeight) {
+      heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.2}px)`;
+    }
+    if (statsBg) {
+      const rect = statsBg.parentElement.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const offset = (window.innerHeight / 2 - rect.top - rect.height / 2) * 0.12;
+        statsBg.style.transform = `scale(1.08) translateY(${offset}px)`;
+      }
+    }
+    if (servicesBg) {
+      const rect = servicesBg.parentElement.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        const offset = (window.innerHeight / 2 - rect.top - rect.height / 2) * 0.12;
+        servicesBg.style.transform = `scale(1.08) translateY(${offset}px)`;
+      }
+    }
+  }, { passive: true });
+
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => {
+    l.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ── HERO ENTRANCE ──
+  window.addEventListener('load', () => {
+    ['heroTag','heroTitle','heroSub','heroActions'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) setTimeout(() => el.classList.add('visible'), i * 80 + 80);
+    });
+  });
+
+  // ── INTERSECTION OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll(
+    '.reveal, .reveal-left, .reveal-right, .stat-item, .service-card, .plan-card, .sucursal-card, .contact-item'
+  ).forEach(el => observer.observe(el));
+
+  // ── COUNTERS ──
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startCounter(entry.target);
+        counterObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+  function startCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const dur = 1500;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target).toLocaleString('es-CL');
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('es-CL');
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ── HERO CAROUSEL ──
+  (function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots   = document.querySelectorAll('.carousel-dot');
+    const counter = document.getElementById('carouselCounter');
+    const bar    = document.getElementById('carouselBar');
+    const wrap   = document.getElementById('heroCarousel');
+    let current  = 0;
+    let timer;
+
+    function startProgress() {
+      bar.classList.remove('running');
+      void bar.offsetWidth;
+      bar.classList.add('running');
+    }
+
+    window.goToSlide = function(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      counter.textContent = String(current + 1).padStart(2, '0') + ' / 04';
+      startProgress();
+      clearInterval(timer);
+      timer = setInterval(() => window.goToSlide(current + 1), 4000);
+    };
+
+    window.addEventListener('load', () => {
+      setTimeout(() => { if (wrap) wrap.classList.add('visible'); }, 900);
+      startProgress();
+      timer = setInterval(() => window.goToSlide(current + 1), 4000);
+    });
+  })();
+
+  // ── FORM → WHATSAPP ──
+  function handleForm(e) {
+    e.preventDefault();
+    const f = e.target;
+    const nombre      = f.querySelector('input[type="text"]').value;
+    const telefono    = f.querySelector('input[type="tel"]').value;
+    const especialidad = f.querySelector('select').value;
+    const mensaje     = f.querySelector('textarea').value;
+    let text = `Hola Clínica Santa Blanca, me llamo *${nombre}*`;
+    if (telefono) text += `, mi teléfono es ${telefono}`;
+    if (especialidad) text += `. Me interesa: ${especialidad}`;
+    if (mensaje) text += `. ${mensaje}`;
+    window.open(`https://wa.me/56958306543?text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+</body>
+</html>
